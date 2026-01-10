@@ -17,9 +17,9 @@ body {
 }
 
 .quill-editor .ql-container {
-  min-height: 360px;
+  min-height: 240px;
 }
 
 .quill-editor .ql-editor {
-  min-height: 360px;
+  min-height: 240px;
 }
