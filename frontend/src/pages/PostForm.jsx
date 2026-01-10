@@ -69,9 +69,6 @@ const PostForm = () => {
         <span>Go back to posts</span>
       </Link>
       <div className='mb-4'>
-        <p className='text-sm uppercase tracking-[0.2em] text-indigo-500'>
-          {isEditing ? "Update your post" : "Create a new post"}
-        </p>
         <h1 className='text-3xl font-bold text-slate-900'>
           {isEditing ? "Edit Post" : "Create Post"}
         </h1>

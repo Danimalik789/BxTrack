@@ -1,6 +1,10 @@
 const jwt = require("jsonwebtoken");
 
 const auth = (req, res, next) => {
+  if (!process.env.JWT_SECRET) {
+    return res.status(500).json({ message: "JWT_SECRET is not configured" });
+  }
+
   const authHeader = req.headers.authorization || "";
   const token = authHeader.startsWith("Bearer ")
     ? authHeader.split(" ")[1]

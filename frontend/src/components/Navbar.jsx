@@ -20,6 +20,7 @@ const Navbar = () => {
           <Link to='/' className='text-lg text-slate-700 hover:text-indigo-600'>
             Posts
           </Link>
+
           {user && (
             <Link
               to='/create'
