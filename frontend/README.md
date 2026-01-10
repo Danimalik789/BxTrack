@@ -1,70 +1,166 @@
-# Getting Started with Create React App
+# BxTrack Frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A modern, responsive blog management frontend built with React, Tailwind CSS, and React Router.
 
-## Available Scripts
 
-In the project directory, you can run:
+##  Tech Stack
 
-### `npm start`
+- **Framework**: React 18.2.0
+- **Routing**: React Router DOM 7.12.0
+- **Styling**: Tailwind CSS 3.4.19
+- **HTTP Client**: Axios 1.13.2
+- **Rich Text Editor**: React Quill 2.0.0
+- **Security**: DOMPurify 3.3.1
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Setup Instructions
 
-### `npm test`
+### Prerequisites
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Node.js (v14 or higher)
+- npm or yarn
+- Backend running 
 
-### `npm run build`
+### Installation
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1. **Navigate to the frontend directory:**
+   ```bash
+   cd frontend
+   ```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+2. **Install dependencies:**
+   ```bash
+   npm install
+   ```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+3. **Create a `.env` file in the frontend root:**
+   ```env
+   REACT_APP_BACKEND_URL=http://localhost:5000/api
+   ```
 
-### `npm run eject`
+4. **Start the development server:**
+   ```bash
+   npm start
+   ```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+   The app will open in your browser at `http://localhost:3000`.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+##  Architecture
 
-## Learn More
+### Overview
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+The frontend follows a component-based architecture with:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- **Pages**: Main route components (Home, Login, Register, PostForm, PostDetail)
+- **Components**: Reusable UI components (Navbar, PostCard, ProtectedRoute)
+- **Context**: Global state management (AuthContext)
+- **Services**: API communication layer (api.js, auth.js, posts.js)
+- **Routing**: Client-side routing with React Router
 
-### Code Splitting
+### State Management
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+- **AuthContext**: Manages user authentication state, token, and user data
+- **Local State**: Component-level state using React hooks (useState, useEffect)
+- **Local Storage**: Persists authentication tokens and user data
 
-### Analyzing the Bundle Size
+### Data Flow
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+1. User interacts with UI components
+2. Components call service functions (auth.js, posts.js)
+3. Services use axios to make HTTP requests to the backend API
+4. Responses update context or local state
+5. UI re-renders with new data
 
-### Making a Progressive Web App
+##  Features
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+### Authentication
+- User registration with name, email, and password
+- User login with email and password
+- JWT token-based authentication
+- Protected routes (require authentication)
+- Automatic redirect for logged-in users (login/register pages)
+- Persistent sessions via localStorage
 
-### Advanced Configuration
+### Posts Management
+- View all posts with pagination
+- View individual post details
+- Create new posts with rich text editor
+- Edit own posts
+- Delete own posts
+- Author-only edit/delete permissions
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
 
-### Deployment
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+##  Project Structure
 
-### `npm run build` fails to minify
+```
+frontend/
+├── public/
+│   ├── index.html          # HTML template
+│   └── ...
+├── src/
+│   ├── components/
+│   │   ├── Navbar.jsx      # Navigation bar
+│   │   ├── PostCard.jsx    # Post preview card
+│   │   └── ProtectedRoute.jsx # Route protection wrapper
+│   ├── context/
+│   │   └── AuthContext.js  # Authentication context provider
+│   ├── pages/
+│   │   ├── Home.jsx        # Posts listing page
+│   │   ├── Login.jsx       # Login page
+│   │   ├── Register.jsx    # Registration page
+│   │   ├── PostForm.jsx    # Create/Edit post form
+│   │   └── PostDetail.jsx  # Post detail view
+│   ├── services/
+│   │   ├── api.js          # Axios instance configuration
+│   │   ├── auth.js         # Authentication API calls
+│   │   └── posts.js        # Posts API calls
+│   ├── App.js              # Main app component with routes
+│   ├── index.js            # App entry point
+│   └── index.css           # Global styles and Tailwind imports
+├── package.json
+├── tailwind.config.js      # Tailwind CSS configuration
+├── postcss.config.js       # PostCSS configuration
+└── README.md
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### Component Details
+
+#### Pages
+
+- **Home.jsx**: Displays paginated list of all posts
+- **Login.jsx**: User login form with email and password
+- **Register.jsx**: User registration form
+- **PostForm.jsx**: Create or edit post with rich text editor
+- **PostDetail.jsx**: View individual post with edit/delete options (for owners)
+
+#### Components
+
+- **Navbar.jsx**: Top navigation with links and user info
+- **PostCard.jsx**: Reusable card component for post previews
+- **ProtectedRoute.jsx**: HOC that redirects unauthenticated users
+
+#### Services
+
+- **api.js**: Configured axios instance with base URL and auth interceptors
+- **auth.js**: Authentication API functions (register, login)
+- **posts.js**: Posts API functions (CRUD operations)
+
+
+## 🔐 Environment Variables
+
+| Variable | Description | Default |
+|----------|-------------|---------|
+| `REACT_APP_BACKEND_URL` | Backend API base URL | `http://localhost:5000/api` |
+
+Create a `.env` file in the frontend root to override defaults:
+
+```env
+REACT_APP_BACKEND_URL=http://localhost:5000/api
+```
+
+**Note**: Environment variables must be prefixed with `REACT_APP_` to be accessible in the React app.
+
+

@@ -9,25 +9,51 @@ dotenv.config();
 
 const app = express();
 
-const FRONT_END_URL = process.env.FRONT_END_URL;
+const FRONT_END_URL = process.env.FRONT_END_URL || "*";
 
-app.use(cors({ origin: FRONT_END_URL, credentials: true }));
+app.use(
+  cors({
+    origin: FRONT_END_URL === "*" ? true : FRONT_END_URL,
+    credentials: true,
+  })
+);
 app.use(express.json());
+
+// Connect to database on first request (serverless-friendly)
+app.use(async (req, res, next) => {
+  try {
+    await connectDB();
+  } catch (err) {
+    console.error("Database connection error:", err);
+    return res.status(500).json({ message: "Database connection failed" });
+  }
+  next();
+});
 
 app.use("/api/auth", authRoutes);
 app.use("/api/posts", postRoutes);
 
 app.use(errorMiddleware);
 
-const PORT = process.env.PORT || 5000;
+// Health check endpoint
+app.get("/api/health", (req, res) => {
+  res.json({ status: "ok", message: "API is running" });
+});
 
-connectDB()
-  .then(() => {
-    app.listen(PORT, () => {
-      console.log(`Server listening on port ${PORT}`);
+// For Vercel serverless: export the app
+module.exports = app;
+
+// For local development: start the server
+if (require.main === module) {
+  const PORT = process.env.PORT || 5000;
+  connectDB()
+    .then(() => {
+      app.listen(PORT, () => {
+        console.log(`Server listening on port ${PORT}`);
+      });
+    })
+    .catch((err) => {
+      console.error("Failed to start server:", err);
+      process.exit(1);
     });
-  })
-  .catch((err) => {
-    console.error("Failed to start server:", err);
-    process.exit(1);
-  });
+}

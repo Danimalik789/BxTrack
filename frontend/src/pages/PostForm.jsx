@@ -60,7 +60,7 @@ const PostForm = () => {
   }
 
   return (
-    <div className='mx-auto mt-6 max-w-4xl rounded-2xl border border-white/40 bg-white/85 p-6 shadow-xl shadow-indigo-100 backdrop-blur md:p-8'>
+    <div className='mt-6 rounded-2xl border border-white/40 bg-white/85 p-6 shadow-xl shadow-indigo-100 backdrop-blur md:p-8'>
       <Link
         to='/'
         className='mb-4 flex items-center gap-2 text-slate-600 hover:text-slate-900'

@@ -40,7 +40,7 @@ const Home = () => {
   }
 
   return (
-    <div className='mx-auto mt-6 max-w-5xl space-y-5 rounded-2xl border border-white/40 bg-white/80 p-6 shadow-xl shadow-indigo-100 backdrop-blur md:p-8'>
+    <div className='mx-auto mt-6 max-w-7xl space-y-5 rounded-2xl border border-white/40 bg-white/80 p-6 shadow-xl shadow-indigo-100 backdrop-blur md:p-8'>
       <div className='flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between'>
         <div>
           <h1 className='text-3xl font-bold text-slate-900'>Latest Posts</h1>

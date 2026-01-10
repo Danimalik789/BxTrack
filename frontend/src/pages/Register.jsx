@@ -1,12 +1,17 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, Navigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
 const Register = () => {
   const navigate = useNavigate();
-  const { register, setError, error } = useAuth();
+  const { register, setError, error, token, loading } = useAuth();
   const [form, setForm] = useState({ name: "", email: "", password: "" });
   const [submitting, setSubmitting] = useState(false);
+
+  // Redirect if already logged in
+  if (!loading && token) {
+    return <Navigate to='/' replace />;
+  }
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -26,7 +31,7 @@ const Register = () => {
   };
 
   return (
-    <div className='mx-auto mt-10 max-w-md rounded-2xl border border-white/40 bg-white/85 p-6 shadow-xl shadow-indigo-100 backdrop-blur md:p-8'>
+    <div className='mx-auto mt-10 max-w-2xl rounded-2xl border border-white/40 bg-white/85 p-6 shadow-xl shadow-indigo-100 backdrop-blur md:p-8'>
       <div className='mb-4'>
         <h1 className='text-3xl font-bold text-slate-900'>Register</h1>
       </div>

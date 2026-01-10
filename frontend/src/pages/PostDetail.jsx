@@ -55,7 +55,7 @@ const PostDetail = () => {
   if (!post) return null;
 
   return (
-    <div className='mx-auto mt-6 max-w-4xl rounded-2xl border border-white/40 bg-white/85 p-6 shadow-xl shadow-indigo-100 backdrop-blur md:p-8'>
+    <div className='mx-auto mt-6 max-w-7xl rounded-2xl border border-white/40 bg-white/85 p-6 shadow-xl shadow-indigo-100 backdrop-blur md:p-8'>
       <Link
         to='/'
         className='mb-4 flex items-center gap-2 text-slate-600 hover:text-slate-900'
@@ -65,7 +65,6 @@ const PostDetail = () => {
       </Link>
       <div className='flex items-start justify-between gap-3'>
         <div className='flex-1'>
-          
           <h1 className='text-3xl font-bold text-slate-900'>{post.title}</h1>
           <p className='text-sm text-slate-500'>
             By {post.author?.name || "Unknown"} •{" "}
