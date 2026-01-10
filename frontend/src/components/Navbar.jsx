@@ -14,7 +14,7 @@ const Navbar = () => {
     <nav className='sticky top-0 z-20 border-b border-white/40 bg-white/70 shadow-sm backdrop-blur'>
       <div className='mx-auto flex max-w-5xl items-center justify-between px-4 py-3'>
         <Link to='/' className='text-lg font-bold text-indigo-600'>
-          Blog Manager
+          Blog Management
         </Link>
         <div className='flex items-center gap-3'>
           <Link to='/' className='text-lg text-slate-700 hover:text-indigo-600'>
